@@ -6,6 +6,7 @@ metadata:
   {
     "openclaw": {
       "emoji": "🏨",
+      "skillKey": "rollinggo-searchhotel",
       "primaryEnv": "RollingGo_API_KEY",
       "requires": {
         "anyBins": ["rollinggo", "npx", "node", "uvx", "uv"],
@@ -15,16 +16,9 @@ metadata:
         {
           "id": "node",
           "kind": "node",
-          "package": "rollinggo",
+          "package": "rollinggo@latest",
           "bins": ["rollinggo"],
           "label": "Install rollinggo (npm)"
-        },
-        {
-          "id": "uv",
-          "kind": "uv",
-          "package": "rollinggo",
-          "bins": ["rollinggo"],
-          "label": "Install rollinggo (uv)"
         }
       ]
     }
@@ -54,25 +48,19 @@ No key yet? Apply at: https://mcp.agentichotel.cn/apply
 
 ## Runtime
 
-Choose based on user's environment. Load the matching reference file and keep it for the session.
-
-- **`npm`, `npx`, Node, or no preference:** Load [references/rollinggo-npx.md](references/rollinggo-npx.md)
-- **`uv`, `uvx`, PyPI, or Python:** Load [references/rollinggo-uv.md](references/rollinggo-uv.md)
-- **Parity check or both:** Load both references
-
-Default when unspecified → **npm/npx** (broader env compatibility).
+Default to [references/rollinggo-npx.md](references/rollinggo-npx.md); switch to [references/rollinggo-uv.md](references/rollinggo-uv.md) if the user specifies `uv`/`uvx`/Python. For API key persistence see [references/claw-host-env.md](references/claw-host-env.md).
 
 ## Version Freshness (Always Latest)
 
 Default policy for this skill: use the newest release on every run.
 
 - **npm/npx:** `npx --yes --package rollinggo@latest rollinggo ...`
-- **uvx:** `uvx --refresh --from rollinggo rollinggo ...`
+- **uvx:** `uvx --refresh --from rollinggo@latest rollinggo ...`
 
 If using an installed command instead of temporary execution, upgrade first:
 
 - **npm global:** `npm install -g rollinggo@latest`
-- **uv tool:** `uv tool upgrade rollinggo`
+- **uv tool:** `uv tool upgrade rollinggo@latest`
 
 ## Primary Workflow
 

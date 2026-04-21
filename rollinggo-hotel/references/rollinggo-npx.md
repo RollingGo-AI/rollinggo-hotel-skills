@@ -69,15 +69,17 @@ npm install -g rollinggo@latest
 Resolution order: `--api-key` flag → `RollingGo_API_KEY` env var.
 
 ```bash
-# PowerShell
-$env:RollingGo_API_KEY="YOUR_API_KEY"
-
 # Bash / zsh
 export RollingGo_API_KEY="YOUR_API_KEY"
+
+# PowerShell
+$env:RollingGo_API_KEY="YOUR_API_KEY"
 
 # Single-command override
 rollinggo hotel-tags --api-key YOUR_API_KEY
 ```
+
+If the host drops `RollingGo_API_KEY` between runs, see [claw-host-env.md](claw-host-env.md) for persistent injection options.
 
 Apply at: https://mcp.agentichotel.cn/apply
 
@@ -183,7 +185,7 @@ rollinggo search-hotels \
 ## Troubleshooting
 
 - **`rollinggo: command not found`:** Run `npx --yes --package rollinggo@latest rollinggo ...` or `npm install -g rollinggo@latest`
-- **Missing API key error:** Pass `--api-key` or set `RollingGo_API_KEY`
+- **Missing API key error:** Pass `--api-key`, set `RollingGo_API_KEY`, or if you are inside any claw-style host, follow [claw-host-env.md](claw-host-env.md) and inject the same key through that host's config layer
 - **Exit code `2` (validation):** Rerun with `--help`; check required flags, date format, `--child-count` vs `--child-age` count
 - **No hotels returned:** Remove `--star-ratings`, increase `--size` or `--distance-in-meter`, remove tag filters
 - **`hotel-detail` returns no room plans:** Normal business result; try another hotel, different dates, or adjust occupancy
