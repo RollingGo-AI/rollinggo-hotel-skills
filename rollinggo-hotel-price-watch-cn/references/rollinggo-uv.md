@@ -62,7 +62,8 @@ uvx --refresh --from rollinggo@latest rollinggo hotel-tags
 1. 先用 `hotel-tags` 处理模糊偏好
 2. 用 `search-hotels` 拿 3 到 5 个候选
 3. 用户点中某家后，再用 `hotel-detail` 深查
-4. 如果 agent 有 `Heartbeat`、`Cron` 或其他定时任务能力，就直接创建定时监控；否则转成 `监控任务摘要`
+4. 如果用户想继续观察，再按监控路径处理：agent 有 `Heartbeat`、`Cron` 或其他定时任务能力，就直接创建定时监控；否则转成 `监控任务摘要`
+5. 如果用户想现在预订，就提供结果里的预订 URL 或酒店详情页链接，并概括推荐房型、当前价格和取消规则
 
 ## 关键规则
 

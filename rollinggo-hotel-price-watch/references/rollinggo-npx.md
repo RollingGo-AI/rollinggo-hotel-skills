@@ -73,7 +73,8 @@ npx --yes --package rollinggo@latest rollinggo hotel-tags
 1. Use `hotel-tags` for fuzzy preferences
 2. Use `search-hotels` to get 3 to 5 candidates
 3. Once the user picks one, use `hotel-detail` to get current pricing and cancellation terms
-4. If the agent has `Heartbeat`, `Cron`, or another scheduled-task capability, create the recurring watch directly; otherwise turn it into a `Watch Task Summary`
+4. If the user wants to keep watching, follow the watch path: if the agent has `Heartbeat`, `Cron`, or another scheduled-task capability, create the recurring watch directly; otherwise turn it into a `Watch Task Summary`
+5. If the user wants to book now, provide the booking URL or hotel detail page link from the result and summarize the recommended room, current price, and cancellation terms
 
 ## Key rules
 

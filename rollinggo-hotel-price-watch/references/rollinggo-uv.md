@@ -62,7 +62,8 @@ uvx --refresh --from rollinggo@latest rollinggo hotel-tags
 1. use `hotel-tags` for fuzzy preferences
 2. use `search-hotels` to get 3 to 5 candidates
 3. once the user picks one, use `hotel-detail`
-4. if the agent has `Heartbeat`, `Cron`, or another scheduled-task capability, create the recurring watch directly; otherwise turn it into a `Watch Task Summary`
+4. if the user wants to keep watching, follow the watch path: if the agent has `Heartbeat`, `Cron`, or another scheduled-task capability, create the recurring watch directly; otherwise turn it into a `Watch Task Summary`
+5. if the user wants to book now, provide the booking URL or hotel detail page link from the result and summarize the recommended room, current price, and cancellation terms
 
 ## Key rules
 

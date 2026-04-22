@@ -1,6 +1,6 @@
 ---
 name: rollinggo-hotel-price-watch
-description: Hotel price-drop monitoring and shortlist assistant. Use this skill whenever the user already booked a hotel and worries they paid too much, wants help watching a hotel for later price drops, asks for the latest free-cancellation deadline before deciding, or has not booked yet but wants a tighter shortlist of hotels that are worth monitoring instead of a generic recommendation dump. The goal is to turn fuzzy hotel-shopping anxiety into a concrete watch task. Trigger phrases - "did I overpay", "watch this hotel", "will this hotel get cheaper", "worth waiting on", "hotel price alert", "cancellation deadline", "hotel deal hunt".
+description: Hotel price-drop monitoring, hotel search, and booking-guidance assistant. Use this skill whenever the user already booked a hotel and worries they paid too much, wants help watching a hotel for later price drops, asks for the latest free-cancellation deadline before deciding, or has not booked yet but wants help searching hotels, narrowing the field to properties worth watching, or moving forward with a hotel booking. The goal is to turn fuzzy hotel-shopping anxiety into a concrete watch, shortlist, or booking action. Trigger phrases - "did I overpay", "watch this hotel", "will this hotel get cheaper", "worth waiting on", "hotel price alert", "cancellation deadline", "hotel deal hunt", "search hotels", "book this hotel".
 homepage: https://mcp.agentichotel.cn
 metadata:
   {
@@ -34,6 +34,7 @@ metadata:
 - **"Worth watching" discovery:** The user has not booked yet and wants help narrowing the field to hotels worth monitoring for price opportunities.
 - **Decision support before booking:** The user wants current room details, cancellation timing, or a clearer signal on whether to wait or book.
 - **Guided shortlist instead of a dump:** The user needs you to reduce decision pressure, not just list many hotels.
+- **Booking handoff:** The user is ready to move forward and needs hotel detail, room-plan guidance, and a booking link or hotel detail page.
 
 ❌ **Do not use this skill when:**
 - The user only wants a plain hotel search with no price-watch, cancellation, or "is this worth waiting on" angle.
@@ -52,8 +53,9 @@ metadata:
 
 ## Capability Boundaries
 
-- This skill should turn fuzzy hotel-price anxiety into a clear monitoring task.
+- This skill should turn fuzzy hotel-shopping anxiety into a clear watch, shortlist, or booking-guidance action rather than pretending a notification or booking loop already exists.
 - **Never invent** price history, drop percentages, cancellation rules, or notification capabilities.
+- If the user decides to book now, continue with hotel search, hotel detail inspection, and booking guidance by surfacing the booking URL or hotel detail page link from the result.
 - If the current environment has `Heartbeat`, `Cron`, or other reminder / task / messaging tools, create the watch task directly.
 - Capability priority: scheduled abilities such as `Heartbeat` / `Cron` > other persistent reminder or task tools > only producing a `Watch Task Summary`.
 - If the current environment does **not** have reminder tooling, still finish the valuable part:
@@ -72,7 +74,7 @@ Default to [references/rollinggo-npx.md](references/rollinggo-npx.md); switch to
 
 Start with a short intro that covers both cases, then immediately ask which applies.
 
-> If you've already booked a hotel, I can keep an eye on whether the same stay gets cheaper later. If you haven't booked yet, I can narrow it down to a few hotels that are actually worth watching. Do you already have a booking?
+> If you've already booked a hotel, I can keep an eye on whether the same stay gets cheaper later. If you haven't booked yet, I can help search hotels, narrow it down to a few worth watching, or move you toward booking once one looks right. Do you already have a booking?
 
 Do not open with a long questionnaire.
 
@@ -178,7 +180,8 @@ After the table, make a judgment call instead of dumping the choice back onto th
 If the user shows interest in one hotel:
 1. Use `hotel-detail` to inspect room plans, current pricing, and cancellation rules.
 2. Prioritize extracting the latest free-cancellation deadline.
-3. Turn that into a monitoring task.
+3. If the user wants to keep watching, turn that into a monitoring task.
+4. If the user wants to book now, provide the booking URL or hotel detail page link plus a concise summary of the recommended room, current price, and cancellation terms. Unless the environment truly supports booking completion, do not imply that the reservation has already been made.
 
 #### 3f. User Dislikes the Shortlist
 
