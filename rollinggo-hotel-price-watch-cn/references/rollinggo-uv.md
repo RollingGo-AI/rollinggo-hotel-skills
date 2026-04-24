@@ -54,16 +54,18 @@ uvx --refresh --from rollinggo@latest rollinggo hotel-tags
 3. 用“酒店名 + 城市 / 区域 + 可拿到的地址 / 品牌信号”确认具体是哪一家；如果仍然有歧义，就让用户确认
 4. 对已确认的酒店用 `hotel-detail` 查当前价格和取消规则
 5. 必要时再补平台、方案名、原始下单价
-6. 如果 agent 有 `Heartbeat`、`Cron` 或其他定时任务能力，就直接创建定时监控
-7. 如果没有定时能力，再产出 `监控任务摘要`
+6. 按 `booked_price_protection` 或用户自定义场景生成 `watch_config`
+7. 如果 agent 有 `Heartbeat`、`Cron` 或其他定时任务能力，就用 `watch_config` 直接创建定时监控
+8. 如果没有定时能力，再产出包含 `watch_config` 的 `监控任务摘要`
 
 ### 未下单用户
 
 1. 先用 `hotel-tags` 处理模糊偏好
 2. 用 `search-hotels` 拿 3 到 5 个候选
 3. 用户点中某家后，再用 `hotel-detail` 深查
-4. 如果用户想继续观察，再按监控路径处理：agent 有 `Heartbeat`、`Cron` 或其他定时任务能力，就直接创建定时监控；否则转成 `监控任务摘要`
-5. 如果用户想现在预订，就提供结果里的预订 URL 或酒店详情页链接，并概括推荐房型、当前价格和取消规则
+4. 如果用户命中"周末度假监控"、"出差备选监控"、"心仪酒店蹲守"等场景，先套用对应模板生成 `watch_config`
+5. 如果用户想继续观察，再按监控路径处理：agent 有 `Heartbeat`、`Cron` 或其他定时任务能力，就用 `watch_config` 创建定时监控；否则转成包含 `watch_config` 的 `监控任务摘要`
+6. 如果用户想现在预订，就提供结果里的预订 URL 或酒店详情页链接，并概括推荐房型、当前价格和取消规则
 
 ## 关键规则
 
@@ -74,6 +76,8 @@ uvx --refresh --from rollinggo@latest rollinggo hotel-tags
 - 不要只靠 `--name` 的模糊匹配直接比价，先确认具体酒店实体
 - 没有真实历史波动数据时，不要捏造波动百分比
 - 如果 agent 有 `Heartbeat` 或 `Cron`，优先用它们承接定时盯价，不要只停在一次性摘要
+- 用户只说场景名时，优先套用 `weekend_getaway`、`business_backup`、`favorite_hotel`、`booked_price_protection`；说不准时才用 `custom`
+- `watch_config` 只是配置；只有真实创建提醒 / 任务成功后，才能说监控已经建立
 
 ## 排查
 

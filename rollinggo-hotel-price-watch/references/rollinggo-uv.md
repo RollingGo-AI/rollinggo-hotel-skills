@@ -54,16 +54,18 @@ uvx --refresh --from rollinggo@latest rollinggo hotel-tags
 3. confirm the matched property by name plus city/area and any available address or brand signal; if still ambiguous, ask the user to choose
 4. use `hotel-detail` to inspect current pricing and cancellation rules for the confirmed property
 5. ask for the booking platform, exact plan, or booked price only if needed
-6. if the agent has `Heartbeat`, `Cron`, or another scheduled-task capability, create the recurring watch directly
-7. if no scheduled capability exists, produce a `Watch Task Summary`
+6. generate `watch_config` with `booked_price_protection` or the user's custom scenario
+7. if the agent has `Heartbeat`, `Cron`, or another scheduled-task capability, create the recurring watch directly from `watch_config`
+8. if no scheduled capability exists, produce a `Watch Task Summary` that includes `watch_config`
 
 ### Not booked yet
 
 1. use `hotel-tags` for fuzzy preferences
 2. use `search-hotels` to get 3 to 5 candidates
 3. once the user picks one, use `hotel-detail`
-4. if the user wants to keep watching, follow the watch path: if the agent has `Heartbeat`, `Cron`, or another scheduled-task capability, create the recurring watch directly; otherwise turn it into a `Watch Task Summary`
-5. if the user wants to book now, provide the booking URL or hotel detail page link from the result and summarize the recommended room, current price, and cancellation terms
+4. if the user matched a scenario such as "weekend getaway watch", "business trip backup watch", or "watch my favorite hotel", apply that template and generate `watch_config`
+5. if the user wants to keep watching, follow the watch path: if the agent has `Heartbeat`, `Cron`, or another scheduled-task capability, create the recurring watch from `watch_config`; otherwise turn it into a `Watch Task Summary` with `watch_config`
+6. if the user wants to book now, provide the booking URL or hotel detail page link from the result and summarize the recommended room, current price, and cancellation terms
 
 ## Key rules
 
@@ -74,6 +76,8 @@ uvx --refresh --from rollinggo@latest rollinggo hotel-tags
 - do not rely on fuzzy `--name` matching alone; confirm the property before price comparison
 - if there is no real price-history data, do not invent volatility percentages
 - if the agent has `Heartbeat` or `Cron`, prefer using them for recurring price checks instead of stopping at a one-off summary
+- when the user only names a scenario, prefer `weekend_getaway`, `business_backup`, `favorite_hotel`, or `booked_price_protection`; use `custom` only when none fits
+- `watch_config` is only configuration; only say monitoring has been created after a real reminder / task call succeeds
 
 ## Troubleshooting
 
