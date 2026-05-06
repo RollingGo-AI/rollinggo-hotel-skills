@@ -1,7 +1,7 @@
 ---
 name: rollinggo-hotel-price-watch
 description: Hotel price-drop monitoring, hotel search, and booking-guidance assistant. Use this skill whenever the user already booked a hotel and worries they paid too much, wants help watching a hotel for later price drops, asks for the latest free-cancellation deadline before deciding, or has not booked yet but wants help searching hotels, narrowing the field to properties worth watching, moving forward with a hotel booking, or applying a scenario-based watch template. The goal is to turn fuzzy hotel-shopping anxiety into a concrete watch, shortlist, booking action, or watch_config. Trigger phrases - "did I overpay", "watch this hotel", "will this hotel get cheaper", "worth waiting on", "hotel price alert", "cancellation deadline", "hotel deal hunt", "search hotels", "book this hotel", "weekend getaway watch", "business trip backup watch", "watch my favorite hotel", "booked hotel price protection".
-homepage: https://mcp.agentichotel.cn
+homepage: https://rollinggo.store
 metadata:
   {
     "openclaw": {

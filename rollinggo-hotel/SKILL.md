@@ -1,7 +1,7 @@
 ---
 name: rollinggo-searchhotel
 description: Hotel search and pricing via the RollingGo CLI. Use when the user wants to search hotels by destination, filter by date/star/budget/tags/distance, inspect hotel detail and room pricing, or look up hotel tags. Trigger phrases — "search hotels", "find hotels near", "hotel detail", "hotel pricing", "hotel tags", "rollinggo".
-homepage: https://mcp.agentichotel.cn
+homepage: https://rollinggo.store
 metadata:
   {
     "openclaw": {
